@@ -1,0 +1,109 @@
+# Laravel
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/public/storage/resumes
+/storage/*.key
+/bootstrap/cache
+.env
+.env.backup
+.env.*.local
+.env.production
+.env.production.local
+
+# Testing
+.phpunit.result.cache
+phpunit.xml
+.coverage
+
+# IDE & Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+.editorconfig
+
+# OS
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Logs
+*.log
+npm-debug.log
+yarn-error.log
+storage/logs/
+
+# Vagrant & VirtualBox
+Homestead.json
+Homestead.yaml
+.vagrant
+
+# Database
+database.sqlite
+database.sqlite-journal
+*.db
+*.sqlite
+storage/database.sqlite
+
+# Cache
+.cache/
+bootstrap/cache/*
+storage/framework/cache/*
+
+# Session
+storage/framework/sessions/*
+
+# Views
+storage/framework/views/*
+
+# Package managers
+composer.lock
+package-lock.json
+yarn.lock
+
+# Local development
+.env.local
+.env.dusk.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Build & Compiled assets
+public/css/
+public/js/
+public/mix-manifest.json
+build/
+
+# Dependencies version managers
+.ruby-version
+.python-version
+.node-version
+
+# IDE files
+*.iml
+*.iws
+*.ipr
+
+# Misc
+.env.example.local
+storage/debugbar/
+.rnd

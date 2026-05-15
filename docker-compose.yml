@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: startuphub:latest
+    container_name: startuphub_app
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - APP_NAME="StartupHub"
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_URL=http://localhost
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=startup_hub
+      - DB_USERNAME=startuphub
+      - DB_PASSWORD=password
+      - CACHE_DRIVER=redis
+      - REDIS_HOST=redis
+      - QUEUE_CONNECTION=redis
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - startuphub
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: startuphub_postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=startup_hub
+      - POSTGRES_USER=startuphub
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - startuphub
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U startuphub"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: startuphub_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - startuphub
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:alpine
+    container_name: startuphub_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/app
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - app
+    networks:
+      - startuphub
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: startuphub_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - startuphub
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  startuphub:
+    driver: bridge
