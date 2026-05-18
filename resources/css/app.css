@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Gradient utilities */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+}
+
+.hover-glow {
+    @apply transition-all duration-200 hover:shadow-lg;
+}
+
+.hover-lift {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-premium-lg;
+}
+
+/* Animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slideUp {
+    animation: slideUp 0.5s ease-out;
+}
+
+/* Shimmer loading */
+@keyframes shimmer {
+    0%   { background-position: -1000px 0; }
+    100% { background-position:  1000px 0; }
+}
+
+.shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(to right, #f0f0f0 8%, #f9f9f9 18%, #f0f0f0 33%);
+    background-size: 800px 104px;
+}
+
+/* Focus states */
+input:focus,
+textarea:focus,
+select:focus {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-0;
+}
+
+/* Smooth transitions */
+* {
+    @apply transition-colors duration-200;
+}
+
+/* Custom form styling */
+.form-input,
+.form-textarea,
+.form-select {
+    @apply px-4 py-3 bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+}
+
+/* Button styles */
+.btn-primary {
+    @apply px-6 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover:shadow-lg transition-all;
+}
+
+.btn-secondary {
+    @apply px-6 py-3 bg-slate-100 text-slate-900 rounded-lg font-semibold hover:bg-slate-200 transition-all;
+}
+
+/* Badge styles */
+.badge-primary {
+    @apply px-3 py-1 bg-primary-100 text-primary-700 text-xs rounded-full font-semibold;
+}
+
+.badge-success {
+    @apply px-3 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-full font-semibold;
+}
+
+.badge-warning {
+    @apply px-3 py-1 bg-amber-100 text-amber-700 text-xs rounded-full font-semibold;
+}
+
+.badge-danger {
+    @apply px-3 py-1 bg-red-100 text-red-700 text-xs rounded-full font-semibold;
+}

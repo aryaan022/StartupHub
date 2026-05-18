@@ -1,0 +1,25 @@
+{
+  "name": "startuphub",
+  "version": "1.0.0",
+  "description": "Premium startup ecosystem platform",
+  "scripts": {
+    "dev": "tailwindcss -i resources/css/app.css -o public/css/app.css --watch",
+    "development": "tailwindcss -i resources/css/app.css -o public/css/app.css",
+    "watch": "tailwindcss -i resources/css/app.css -o public/css/app.css --watch",
+    "prod": "npm run production",
+    "production": "tailwindcss -i resources/css/app.css -o public/css/app.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.12",
+    "laravel-mix": "^6.0.49",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "alpinejs": "^3.12.0",
+    "axios": "^1.3.2",
+    "gsap": "^3.12.2"
+  }
+}

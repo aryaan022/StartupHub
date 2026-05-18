@@ -16,6 +16,7 @@ class Watchlist extends Model
         'investor_id',
         'startup_id',
         'notes',
+        'added_at',
     ];
 
     protected $casts = [
