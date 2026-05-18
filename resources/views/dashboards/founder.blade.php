@@ -127,9 +127,9 @@
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold text-slate-900">Recent Applications</h2>
                         @if($recentApplications->count() > 0)
-                            <a href="#" class="text-primary-600 hover:text-primary-700 font-semibold">
+                            <span class="text-slate-500 font-semibold cursor-not-allowed">
                                 View All →
-                            </a>
+                            </span>
                         @endif
                     </div>
 
@@ -147,11 +147,11 @@
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">{{ ucfirst($app->status) }}</span>
-                                    <a href="#" class="text-primary-600 hover:text-primary-700">
+                                    <span class="text-slate-400 cursor-not-allowed">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
-                                    </a>
+                                    </span>
                                 </div>
                             </div>
                         @empty
@@ -172,15 +172,15 @@
                         <a href="{{ route('startups.create') }}" class="block w-full px-4 py-3 bg-primary-50 text-primary-700 rounded-lg font-semibold hover:bg-primary-100 transition-colors text-center">
                             Create Startup
                         </a>
-                        <a href="#" class="block w-full px-4 py-3 bg-slate-100 text-slate-900 rounded-lg font-semibold hover:bg-slate-200 transition-colors text-center">
+                        <button class="block w-full px-4 py-3 bg-slate-100 text-slate-500 rounded-lg font-semibold cursor-not-allowed text-center opacity-60">
                             Post Job
-                        </a>
-                        <a href="#" class="block w-full px-4 py-3 bg-slate-100 text-slate-900 rounded-lg font-semibold hover:bg-slate-200 transition-colors text-center">
+                        </button>
+                        <button class="block w-full px-4 py-3 bg-slate-100 text-slate-500 rounded-lg font-semibold cursor-not-allowed text-center opacity-60">
                             Message Investors
-                        </a>
-                        <a href="#" class="block w-full px-4 py-3 bg-slate-100 text-slate-900 rounded-lg font-semibold hover:bg-slate-200 transition-colors text-center">
+                        </button>
+                        <button class="block w-full px-4 py-3 bg-slate-100 text-slate-500 rounded-lg font-semibold cursor-not-allowed text-center opacity-60">
                             View Analytics
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -207,7 +207,7 @@
                             Post first job
                         </li>
                     </ul>
-                    <a href="#" class="mt-6 inline-block text-sm font-semibold underline hover:opacity-90">
+                    <a href="{{ route('resources.index') }}" class="mt-6 inline-block text-sm font-semibold underline hover:opacity-90">
                         View Guides →
                     </a>
                 </div>

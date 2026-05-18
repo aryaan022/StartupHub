@@ -144,8 +144,8 @@
                     <h3 class="font-bold text-lg mb-1">{{ $job->startup->name }}</h3>
                     <p class="text-primary-100 text-xs mb-4">{{ $job->startup->industry }}</p>
                     <div class="space-y-1 text-sm">
-                        <p>👥 {{ $job->startup->team_size }} people</p>
-                        <p>🚀 {{ ucfirst(str_replace('_', ' ', $job->startup->stage)) }}</p>
+                        <p class="flex items-center gap-2"><span class="font-semibold">Team Size:</span> {{ $job->startup->team_size }} people</p>
+                        <p class="flex items-center gap-2"><span class="font-semibold">Stage:</span> {{ ucfirst(str_replace('_', ' ', $job->startup->stage)) }}</p>
                     </div>
                 </div>
             </div>

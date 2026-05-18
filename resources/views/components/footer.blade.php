@@ -30,7 +30,7 @@
                     <li><a href="{{ route('discover') }}" class="text-sm hover:text-white transition-colors">Discover Startups</a></li>
                     <li><a href="{{ route('jobs.index') }}" class="text-sm hover:text-white transition-colors">Find Jobs</a></li>
                     <li><a href="{{ route('investors.index') }}" class="text-sm hover:text-white transition-colors">Explore Investors</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">About Us</a></li>
+                    <li><span class="text-sm text-slate-500 cursor-not-allowed">About Us</span></li>
                 </ul>
             </div>
 
@@ -41,7 +41,7 @@
                     <li><a href="{{ route('register', ['role' => 'founder']) }}" class="text-sm hover:text-white transition-colors">For Startups</a></li>
                     <li><a href="{{ route('register', ['role' => 'investor']) }}" class="text-sm hover:text-white transition-colors">For Investors</a></li>
                     <li><a href="{{ route('register', ['role' => 'job_seeker']) }}" class="text-sm hover:text-white transition-colors">For Job Seekers</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">For Partners</a></li>
+                    <li><span class="text-sm text-slate-500 cursor-not-allowed">For Partners</span></li>
                 </ul>
             </div>
 
@@ -49,10 +49,10 @@
             <div>
                 <h4 class="font-semibold text-white mb-4">Resources</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Blog</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Guides</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Help Center</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">API Docs</a></li>
+                    <li><a href="{{ route('resources.index') }}" class="text-sm hover:text-white transition-colors">Guides & Tutorials</a></li>
+                    <li><a href="{{ route('resources.index') }}#faqs" class="text-sm hover:text-white transition-colors">FAQs</a></li>
+                    <li><a href="{{ route('discover') }}" class="text-sm hover:text-white transition-colors">Discover Startups</a></li>
+                    <li><a href="{{ route('investors.index') }}" class="text-sm hover:text-white transition-colors">Find Investors</a></li>
                 </ul>
             </div>
 
@@ -60,10 +60,10 @@
             <div>
                 <h4 class="font-semibold text-white mb-4">Legal</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Terms of Service</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Security</a></li>
-                    <li><a href="#" class="text-sm hover:text-white transition-colors">Contact</a></li>
+                    <li><span class="text-sm text-slate-500 cursor-not-allowed">Privacy Policy</span></li>
+                    <li><span class="text-sm text-slate-500 cursor-not-allowed">Terms of Service</span></li>
+                    <li><span class="text-sm text-slate-500 cursor-not-allowed">Security</span></li>
+                    <li><a href="mailto:hello@startuphub.com" class="text-sm hover:text-white transition-colors">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -73,9 +73,9 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-sm text-slate-400">&copy; {{ date('Y') }} StartupHub. All rights reserved.</p>
                 <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Terms</a>
-                    <a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">Cookies</a>
+                    <span class="text-sm text-slate-500 cursor-not-allowed">Privacy</span>
+                    <span class="text-sm text-slate-500 cursor-not-allowed">Terms</span>
+                    <span class="text-sm text-slate-500 cursor-not-allowed">Cookies</span>
                 </div>
             </div>
         </div>

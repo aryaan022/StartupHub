@@ -23,11 +23,14 @@
                     </div>
                 </div>
 
-                <div class="flex gap-4">
+                <div class="flex gap-3 flex-wrap">
                     <button class="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
                         Add to Watchlist
                     </button>
-                    <button class="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                    <a href="{{ route('investments.create', $startup->id) }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block">
+                        Invest Now
+                    </a>
+                    <button class="px-6 py-3 border-2 border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-100 transition-colors">
                         Follow
                     </button>
                 </div>

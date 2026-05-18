@@ -112,20 +112,34 @@
                         </button>
                     </div>
 
+                    @if($startup->teamMembers->count() > 0)
                     <div class="space-y-4">
-                        @for ($i = 0; $i < 3; $i++)
+                        @foreach($startup->teamMembers as $member)
                         <div class="p-4 border border-slate-200 rounded-lg flex items-center justify-between">
                             <div class="flex items-center gap-4">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed={{ $i }}" alt="Member" class="w-12 h-12 rounded-full">
+                                <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white font-bold">
+                                    {{ strtoupper(substr($member->name, 0, 1)) }}
+                                </div>
                                 <div>
-                                    <p class="font-semibold text-slate-900">{{ ['Sarah Chen', 'Michael Rodriguez', 'Emma Wilson'][$i] }}</p>
-                                    <p class="text-sm text-slate-600">{{ ['CEO & Co-founder', 'CTO & Co-founder', 'VP of Product'][$i] }}</p>
+                                    <p class="font-semibold text-slate-900">{{ $member->name }}</p>
+                                    <p class="text-sm text-slate-600">{{ $member->role }}</p>
                                 </div>
                             </div>
-                            <button class="text-red-600 hover:text-red-700 font-medium">Remove</button>
+                            <form method="POST" action="#" onclick="return confirm('Remove member?')">
+                                @csrf
+                                <button type="submit" class="text-red-600 hover:text-red-700 font-medium">Remove</button>
+                            </form>
                         </div>
-                        @endfor
+                        @endforeach
                     </div>
+                    @else
+                    <div class="text-center py-12 bg-slate-50 rounded-lg border border-slate-200">
+                        <p class="text-slate-600 mb-4">No team members added yet</p>
+                        <button class="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700">
+                            Add Team Member
+                        </button>
+                    </div>
+                    @endif
                 </div>
 
                 <!-- Funding -->

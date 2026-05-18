@@ -22,6 +22,16 @@ class InvestorWebController extends Controller
         return view('investors.index', compact('investors'));
     }
 
+    public function funding(Request $request)
+    {
+        $investors = Investor::with('user')
+            ->withCount('investments')
+            ->latest()
+            ->paginate(12);
+
+        return view('funding.index', compact('investors'));
+    }
+
     public function watchlist()
     {
         $investor = Investor::firstOrCreate(

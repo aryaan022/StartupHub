@@ -7,6 +7,8 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\StartupWebController;
 use App\Http\Controllers\Web\JobWebController;
 use App\Http\Controllers\Web\InvestorWebController;
+use App\Http\Controllers\Web\ResourcesController;
+use App\Http\Controllers\Web\InvestmentController;
 
 // ── Public ────────────────────────────────────────────────────────────────────
 Route::get('/',          [HomeController::class, 'index'])->name('home');
@@ -14,7 +16,8 @@ Route::get('/discover',  [StartupWebController::class, 'discover'])->name('disco
 Route::get('/jobs',      [JobWebController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{id}', [JobWebController::class, 'show'])->name('jobs.show');
 Route::get('/investors', [InvestorWebController::class, 'index'])->name('investors.index');
-Route::get('/funding',   fn() => view('funding.index'))->name('funding.index');
+Route::get('/funding',   [InvestorWebController::class, 'funding'])->name('funding.index');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resources.index');
 
 // Startup public profile (must be before auth group to allow public viewing)
 Route::get('/startups/{id}', [StartupWebController::class, 'show'])->name('startups.show');
@@ -57,6 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/watchlist',                            [InvestorWebController::class, 'watchlist'])->name('watchlist.index');
     Route::post('/watchlist/{startupId}',               [InvestorWebController::class, 'addToWatchlist'])->name('watchlist.add');
     Route::delete('/watchlist/{startupId}',             [InvestorWebController::class, 'removeFromWatchlist'])->name('watchlist.remove');
+
+    // Investments
+    Route::get('/startups/{id}/invest',                 [InvestmentController::class, 'create'])->name('investments.create');
+    Route::post('/investments',                         [InvestmentController::class, 'store'])->name('investments.store');
+    Route::get('/portfolio',                            [InvestmentController::class, 'portfolio'])->name('investments.portfolio');
+    Route::delete('/investments/{id}',                  [InvestmentController::class, 'cancel'])->name('investments.cancel');
 
     // Other pages
     Route::get('/messages',      fn() => view('messages.index'))->name('messages.index');

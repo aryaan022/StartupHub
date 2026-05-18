@@ -30,10 +30,10 @@
 
                 <!-- Menu Items -->
                 <div class="hidden md:flex items-center gap-1">
-                    <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Discover</a>
-                    <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Jobs</a>
-                    <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Invest</a>
-                    <a href="#" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Resources</a>
+                    <a href="{{ route('discover') }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Discover</a>
+                    <a href="{{ route('jobs.index') }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Jobs</a>
+                    <a href="{{ route('investors.index') }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Invest</a>
+                    <a href="{{ route('resources.index') }}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition">Resources</a>
                 </div>
 
                 <!-- Auth Buttons -->
@@ -77,24 +77,24 @@
                 <div>
                     <h4 class="font-semibold mb-4">Platform</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Discover Startups</a></li>
-                        <li><a href="#" class="hover:text-white transition">Find Jobs</a></li>
-                        <li><a href="#" class="hover:text-white transition">Invest</a></li>
+                        <li><a href="{{ route('discover') }}" class="hover:text-white transition">Discover Startups</a></li>
+                        <li><a href="{{ route('jobs.index') }}" class="hover:text-white transition">Find Jobs</a></li>
+                        <li><a href="{{ route('investors.index') }}" class="hover:text-white transition">Invest</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Company</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">About</a></li>
-                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="{{ route('home') }}" class="hover:text-white transition">About</a></li>
+                        <li><a href="{{ route('resources.index') }}" class="hover:text-white transition">Resources</a></li>
+                        <li><a href="mailto:hello@startuphub.com" class="hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Legal</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Privacy</a></li>
-                        <li><a href="#" class="hover:text-white transition">Terms</a></li>
+                        <li><span class="cursor-not-allowed opacity-60">Privacy Policy</span></li>
+                        <li><span class="cursor-not-allowed opacity-60">Terms of Service</span></li>
                     </ul>
                 </div>
             </div>

@@ -20,7 +20,7 @@
                 <a href="{{ route('investors.index') }}" class="text-slate-600 hover:text-slate-900 font-medium transition-colors">
                     Invest
                 </a>
-                <a href="#" class="text-slate-600 hover:text-slate-900 font-medium transition-colors">
+                <a href="{{ route('resources.index') }}" class="text-slate-600 hover:text-slate-900 font-medium transition-colors">
                     Resources
                 </a>
             </div>
@@ -95,7 +95,7 @@
                     <a href="{{ route('discover') }}" class="block px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg">Discover</a>
                     <a href="{{ route('jobs.index') }}" class="block px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg">Jobs</a>
                     <a href="{{ route('investors.index') }}" class="block px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg">Invest</a>
-                    <a href="#" class="block px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg">Resources</a>
+                    <a href="{{ route('resources.index') }}" class="block px-4 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-lg">Resources</a>
                     @guest
                         <a href="{{ route('register') }}" class="block px-4 py-2 mt-4 bg-blue-600 text-white rounded-lg font-medium text-center hover:bg-blue-700">
                             Get Started
