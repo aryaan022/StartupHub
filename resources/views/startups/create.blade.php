@@ -12,165 +12,143 @@
         </div>
 
         <!-- Progress -->
-        <div x-data="{ step: 1 }" class="mb-12">
+        <form action="{{ route('startups.store') }}" method="POST" enctype="multipart/form-data" x-data="{ step: 1, name: '', industry: '', short_description: '', description: '', founded_at: '', city: '', country: '', website_url: '', stage: 'seed', logo: null }" class="mb-12">
+            @csrf
             <div class="flex gap-4 mb-8">
                 <template x-for="i in 4" :key="i">
                     <div class="flex-1">
                         <div 
-                            :class="step >= i ? 'bg-gradient-primary' : 'bg-slate-300'"
+                            :class="step >= i ? 'bg-blue-600' : 'bg-slate-300'"
                             class="h-2 rounded-full transition-all"
                         ></div>
-                        <p :class="step >= i ? 'text-primary-600' : 'text-slate-600'" class="text-xs font-semibold mt-2">
+                        <p :class="step >= i ? 'text-blue-600' : 'text-slate-600'" class="text-xs font-semibold mt-2">
                             <span x-text="['Basics', 'Details', 'Team', 'Review'][i-1]"></span>
                         </p>
                     </div>
                 </template>
-            </div>
+            </div>                                                          
 
             <!-- Step 1: Basics -->
-            <div x-show="step === 1" class="bg-white rounded-xl shadow-premium border border-slate-200 p-8">
+            <div x-show="step === 1" class="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Basic Information</h2>
 
                 <div class="space-y-6 mb-8">
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Company Name *</label>
-                        <input type="text" placeholder="Your amazing startup..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <input type="text" name="name" x-model="name" placeholder="Your amazing startup..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        @error('name') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Industry *</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <select name="industry" x-model="industry" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             <option value="">Select an industry</option>
-                            <option>AI/ML</option>
-                            <option>SaaS</option>
-                            <option>FinTech</option>
-                            <option>EdTech</option>
-                            <option>HealthTech</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="SaaS">SaaS</option>
+                            <option value="FinTech">FinTech</option>
+                            <option value="EdTech">EdTech</option>
+                            <option value="HealthTech">HealthTech</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Other">Other</option>
                         </select>
+                        @error('industry') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Short Description *</label>
-                        <textarea placeholder="What does your startup do?" rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+                        <textarea name="short_description" x-model="short_description" placeholder="What does your startup do?" rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        @error('short_description') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-900 mb-2">Full Description *</label>
+                        <textarea name="description" x-model="description" placeholder="Detailed information about your startup..." rows="4" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        @error('description') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-900 mb-2">Founding Date *</label>
-                            <input type="date" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <label class="block text-sm font-semibold text-slate-900 mb-2">Founding Date</label>
+                            <input type="date" name="founded_at" x-model="founded_at" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-slate-900 mb-2">Headquarters</label>
-                            <input type="text" placeholder="City, Country" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <label class="block text-sm font-semibold text-slate-900 mb-2">City</label>
+                            <input type="text" name="city" x-model="city" placeholder="San Francisco" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
                 </div>
 
                 <div class="flex justify-end">
-                    <button @click="step = 2" class="px-8 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover-glow">
+                    <button type="button" @click="step = 2" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
                         Next →
                     </button>
                 </div>
             </div>
 
             <!-- Step 2: Details -->
-            <div x-show="step === 2" class="bg-white rounded-xl shadow-premium border border-slate-200 p-8">
+            <div x-show="step === 2" class="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Company Details</h2>
 
                 <div class="space-y-6 mb-8">
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Website</label>
-                        <input type="url" placeholder="https://example.com" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                        <input type="url" name="website_url" x-model="website_url" placeholder="https://example.com" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Company Logo</label>
-                        <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center cursor-pointer hover:border-primary-500 transition-colors">
+                        <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors" onclick="document.getElementById('logo-input').click()">
                             <svg class="w-12 h-12 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                             </svg>
                             <p class="text-slate-600">Drag and drop or click to upload</p>
-                            <input type="file" class="hidden" accept="image/*">
+                            <input type="file" id="logo-input" name="logo" @change="logo = $event.target.files[0]" accept="image/*" class="hidden">
+                            <p class="text-xs text-slate-500 mt-2" x-show="logo" x-text="logo?.name"></p>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-900 mb-2">Current Stage *</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
-                            <option>Idea/Pre-seed</option>
-                            <option selected>Seed funded</option>
-                            <option>Series A</option>
-                            <option>Series B+</option>
+                        <select name="stage" x-model="stage" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="idea">Idea</option>
+                            <option value="pre_seed">Pre-seed</option>
+                            <option value="seed">Seed</option>
+                            <option value="series_a">Series A</option>
+                            <option value="series_b">Series B</option>
+                            <option value="series_c">Series C</option>
+                            <option value="growth">Growth</option>
+                            <option value="exit">Exit</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-900 mb-2">Team Size</label>
-                        <select class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
-                            <option>1-5</option>
-                            <option selected>6-15</option>
-                            <option>16-30</option>
-                            <option>30+</option>
-                        </select>
+                        <label class="block text-sm font-semibold text-slate-900 mb-2">Country</label>
+                        <input type="text" name="country" x-model="country" placeholder="USA" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
                 <div class="flex justify-between">
-                    <button @click="step = 1" class="px-8 py-3 border border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
+                    <button type="button" @click="step = 1" class="px-8 py-3 border border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-50">
                         ← Back
                     </button>
-                    <button @click="step = 3" class="px-8 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover-glow">
+                    <button type="button" @click="step = 3" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
                         Next →
                     </button>
                 </div>
             </div>
 
-            <!-- Step 3: Team -->
-            <div x-show="step === 3" class="bg-white rounded-xl shadow-premium border border-slate-200 p-8">
-                <h2 class="text-2xl font-bold text-slate-900 mb-6">Add Team Members</h2>
-
-                <div class="space-y-6 mb-8">
-                    <div class="p-4 border-2 border-dashed border-primary-300 bg-primary-50 rounded-lg">
-                        <p class="text-primary-700 font-medium text-center">You are the founder and admin</p>
-                    </div>
-
-                    <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center cursor-pointer hover:border-primary-500 transition-colors">
-                        <svg class="w-12 h-12 text-slate-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                        </svg>
-                        <p class="text-slate-600 font-medium">Invite team members</p>
-                        <p class="text-sm text-slate-600">Enter emails to invite teammates</p>
-                        <input type="email" placeholder="teammate@example.com" class="w-full px-4 py-2 border border-slate-300 rounded-lg mt-4 focus:outline-none focus:ring-2 focus:ring-primary-500">
-                    </div>
-
-                    <label class="flex items-center gap-3 cursor-pointer p-4 border border-slate-200 rounded-lg hover:bg-slate-50">
-                        <input type="checkbox" class="w-4 h-4 text-primary-600 rounded" checked>
-                        <span class="text-slate-900">I'll add team members later</span>
-                    </label>
-                </div>
-
-                <div class="flex justify-between">
-                    <button @click="step = 2" class="px-8 py-3 border border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
-                        ← Back
-                    </button>
-                    <button @click="step = 4" class="px-8 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover-glow">
-                        Next →
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 4: Review -->
-            <div x-show="step === 4" class="bg-white rounded-xl shadow-premium border border-slate-200 p-8">
+            <!-- Step 3: Summary -->
+            <div x-show="step === 3" class="bg-white rounded-xl shadow-lg border border-slate-200 p-8">
                 <h2 class="text-2xl font-bold text-slate-900 mb-6">Review & Create</h2>
 
                 <div class="space-y-6 mb-8">
                     <div class="p-6 bg-slate-50 rounded-lg border border-slate-200">
                         <h3 class="font-semibold text-slate-900 mb-4">Summary</h3>
                         <div class="space-y-3 text-sm">
-                            <p><span class="text-slate-600">Company:</span> <span class="font-semibold text-slate-900">TechFlow</span></p>
-                            <p><span class="text-slate-600">Industry:</span> <span class="font-semibold text-slate-900">AI/ML</span></p>
-                            <p><span class="text-slate-600">Location:</span> <span class="font-semibold text-slate-900">San Francisco, CA</span></p>
-                            <p><span class="text-slate-600">Stage:</span> <span class="font-semibold text-slate-900">Seed funded</span></p>
+                            <p><span class="text-slate-600">Company:</span> <span class="font-semibold text-slate-900" x-text="name || 'N/A'"></span></p>
+                            <p><span class="text-slate-600">Industry:</span> <span class="font-semibold text-slate-900" x-text="industry || 'N/A'"></span></p>
+                            <p><span class="text-slate-600">Location:</span> <span class="font-semibold text-slate-900" x-text="(city && country) ? `${city}, ${country}` : 'N/A'"></span></p>
+                            <p><span class="text-slate-600">Stage:</span> <span class="font-semibold text-slate-900" x-text="stage || 'N/A'"></span></p>
                         </div>
                     </div>
 
@@ -184,21 +162,21 @@
                     </div>
 
                     <label class="flex items-center gap-3 cursor-pointer">
-                        <input type="checkbox" class="w-4 h-4 text-primary-600 rounded" checked>
+                        <input type="checkbox" class="w-4 h-4 text-blue-600 rounded" required>
                         <span class="text-slate-900">I agree to the Terms of Service</span>
                     </label>
                 </div>
 
                 <div class="flex justify-between">
-                    <button @click="step = 3" class="px-8 py-3 border border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
+                    <button type="button" @click="step = 2" class="px-8 py-3 border border-slate-300 text-slate-900 rounded-lg font-semibold hover:bg-slate-50">
                         ← Back
                     </button>
-                    <a href="{{ route('dashboard') }}" class="inline-block px-8 py-3 bg-gradient-primary text-white rounded-lg font-semibold hover-glow">
+                    <button type="submit" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
                         Create Startup
-                    </a>
+                    </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection

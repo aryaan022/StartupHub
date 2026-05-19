@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Models\Investment;
 use App\Models\Investor;
 use App\Models\Startup;
+use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -66,7 +67,13 @@ class InvestmentController extends Controller
         ]);
 
         // Add to watchlist if not already there
-        $investor->watchlist()->syncWithoutDetaching($validated['startup_id']);
+        Watchlist::firstOrCreate([
+            'investor_id' => $investor->id,
+            'startup_id' => $validated['startup_id'],
+        ], [
+            'id' => \Illuminate\Support\Str::uuid(),
+            'added_at' => now(),
+        ]);
 
         return redirect("/startups/{$validated['startup_id']}")
             ->with('success', 'Investment successful! You can now track this startup in your portfolio.');

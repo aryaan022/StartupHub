@@ -163,6 +163,27 @@ class DashboardController extends Controller
         return back()->with('success', 'Password updated successfully!');
     }
 
+    public function deleteAccount()
+    {
+        $user = Auth::user();
+        
+        // Delete all related data
+        if ($user->role === 'founder') {
+            Startup::where('founder_id', $user->id)->delete();
+        } elseif ($user->role === 'investor') {
+            Investor::where('user_id', $user->id)->delete();
+        }
+        
+        JobApplication::where('applicant_id', $user->id)->delete();
+        
+        // Delete the user
+        $user->delete();
+        
+        Auth::logout();
+        
+        return redirect('/')->with('success', 'Account deleted successfully.');
+    }
+
     public function admin()
     {
         if (!Auth::user()->isAdmin()) abort(403);

@@ -60,7 +60,7 @@ class StartupWebController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'name'              => 'required|string|max:255|unique:startups',
             'industry'          => 'required|string|max:100',
             'short_description' => 'required|string|max:500',
@@ -70,11 +70,17 @@ class StartupWebController extends Controller
             'country'           => 'nullable|string|max:100',
             'website_url'       => 'nullable|url',
             'stage'             => 'nullable|in:idea,pre_seed,seed,series_a,series_b,series_c,growth,exit',
-            'logo'              => 'nullable|image|max:2048',
-        ]);
+        ];
+
+        // Only validate logo if a file is actually provided
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            $rules['logo'] = 'image|max:2048';
+        }
+
+        $data = $request->validate($rules);
 
         $logoUrl = null;
-        if ($request->hasFile('logo')) {
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
             $logoUrl = $request->file('logo')->store('logos', 'public');
         }
 

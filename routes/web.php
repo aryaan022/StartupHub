@@ -20,6 +20,9 @@ Route::get('/funding',   [InvestorWebController::class, 'funding'])->name('fundi
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resources.index');
 
 // Startup public profile (must be before auth group to allow public viewing)
+// IMPORTANT: Specific routes must come BEFORE generic {id} route
+Route::get('/startups/create',  [StartupWebController::class, 'create'])->middleware('auth')->name('startups.create');
+Route::post('/startups',        [StartupWebController::class, 'store'])->middleware('auth')->name('startups.store');
 Route::get('/startups/{id}', [StartupWebController::class, 'show'])->name('startups.show');
 
 // ── Guest only ────────────────────────────────────────────────────────────────
@@ -43,10 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile',           [DashboardController::class, 'profile'])->name('profile.edit');
     Route::post('/profile',          [DashboardController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/password', [DashboardController::class, 'updatePassword'])->name('profile.password');
+    Route::delete('/profile',        [DashboardController::class, 'deleteAccount'])->name('profile.delete');
 
-    // Startups — specific routes before dynamic {id}
-    Route::get('/startups/create',       [StartupWebController::class, 'create'])->name('startups.create');
-    Route::post('/startups',             [StartupWebController::class, 'store'])->name('startups.store');
+    // Startups — manage routes
     Route::get('/startups/{id}/manage',  [StartupWebController::class, 'manage'])->name('startups.manage');
     Route::post('/startups/{id}/update', [StartupWebController::class, 'update'])->name('startups.update');
 

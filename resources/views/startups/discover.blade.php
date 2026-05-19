@@ -63,11 +63,11 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($startups as $startup)
-                <div class="bg-white rounded-xl border border-slate-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all group">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-start gap-3 flex-1">
+                <div class="bg-white rounded-xl border border-slate-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all group overflow-hidden flex flex-col h-full">
+                    <div class="flex items-start justify-between mb-4 gap-3">
+                        <div class="flex items-start gap-3 flex-1 min-w-0">
                             @if($startup->logo_url)
-                                <img src="{{ $startup->logo_url }}" alt="{{ $startup->name }}" class="w-14 h-14 rounded-lg object-cover border border-slate-100">
+                                <img src="{{ $startup->logo_url }}" alt="{{ $startup->name }}" class="w-14 h-14 rounded-lg object-cover border border-slate-100 flex-shrink-0">
                             @else
                                 <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
                                     {{ strtoupper(substr($startup->name, 0, 1)) }}
@@ -77,20 +77,20 @@
                                 <h2 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors truncate">
                                     {{ $startup->name }}
                                 </h2>
-                                <p class="text-slate-500 text-sm truncate">{{ $startup->short_description ?? $startup->industry }}</p>
+                                <p class="text-slate-500 text-sm line-clamp-2">{{ $startup->short_description ?? $startup->industry }}</p>
                                 <div class="flex gap-2 mt-2 flex-wrap">
                                     @if($startup->stage)
-                                        <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded font-medium">{{ ucfirst(str_replace('_',' ',$startup->stage)) }}</span>
+                                        <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded font-medium whitespace-nowrap">{{ ucfirst(str_replace('_',' ',$startup->stage)) }}</span>
                                     @endif
-                                    <span class="px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded font-medium">{{ $startup->industry }}</span>
+                                    <span class="px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded font-medium whitespace-nowrap">{{ $startup->industry }}</span>
                                     @if($startup->is_hiring)
-                                        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs rounded font-medium">Hiring</span>
+                                        <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs rounded font-medium whitespace-nowrap">Hiring</span>
                                     @endif
                                 </div>
                             </div>
                         </div>
                         @auth
-                        <form method="POST" action="{{ route('watchlist.add', $startup->id) }}">
+                        <form method="POST" action="{{ route('watchlist.add', $startup->id) }}" class="flex-shrink-0">
                             @csrf
                             <button type="submit" title="Add to watchlist" class="p-2 hover:bg-blue-50 rounded-lg transition-colors">
                                 <svg class="w-5 h-5 text-slate-400 hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
